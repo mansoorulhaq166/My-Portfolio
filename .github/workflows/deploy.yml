@@ -10,6 +10,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
+      # Add gradle permission setup
+      - name: Make gradlew executable
+        run: chmod +x gradlew
+      
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
@@ -17,7 +21,7 @@ jobs:
           distribution: 'temurin'
           
       - name: Build WASM
-        run: ./gradlew wasmJsBrowserProductionWebpack
+        run: ./gradlew wasmJsBrowserProductionWebpack --no-daemon
         
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
