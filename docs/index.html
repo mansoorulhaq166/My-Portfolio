@@ -2,68 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Mansoor's Portfolio</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #121212;
-            color: #E0E0E0;
-            font-family: 'Segoe UI', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        #loading {
-            font-size: 1.2rem;
-            color: #888;
-        }
-    </style>
+    <title>AndroidDevPortfolio</title>
+    <link type="text/css" rel="stylesheet" href="styles.css">
+    <script type="application/javascript" src="composeApp.js"></script>
 </head>
 <body>
-    <div id="loading">Loading your portfolio...</div>
-
-    <script type="module">
-        console.log("📦 Script loaded — starting app initialization...");
-
-        // Wrap everything in an async IIFE (Immediately Invoked Function Expression)
-        (async () => {
-            try {
-                const module = await import('./composeApp.js');
-                console.log("📦 composeApp.js imported:", module);
-
-                // If it's a default export
-                if (typeof module.default === 'function') {
-                    console.log("🚀 Calling default exported init()...");
-                    await module.default();
-                } else if (typeof module.init === 'function') {
-                    console.log("🚀 Calling named export init()...");
-                    await module.init();
-                } else {
-                    throw new Error("❌ No valid init function found in composeApp.js");
-                }
-
-                console.log("✅ App initialized successfully.");
-                document.getElementById('loading').remove();
-            } catch (e) {
-                console.error("❌ App failed to initialize:", e);
-                document.getElementById('loading').textContent = "Failed to load app.";
-            }
-        })();
-
-        // Global error handlers
-        window.addEventListener("error", (event) => {
-            console.error("❗ Uncaught error:", event.error || event.message);
-        });
-
-        window.addEventListener("unhandledrejection", (event) => {
-            console.error("❗ Unhandled promise rejection:", event.reason);
-        });
-    </script>
 </body>
 </html>
