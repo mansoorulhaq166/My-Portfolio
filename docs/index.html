@@ -29,12 +29,27 @@
     <div id="loading">Loading your portfolio...</div>
 
     <script type="module">
+        console.log("📦 Script loaded — starting app initialization...");
+        
+        // Attempt to import WASM loader
         import init from './composeApp.js';
+
+        console.log("📦 composeApp.js successfully imported. Calling init()...");
+
         init().then(() => {
+            console.log("✅ App initialized successfully.");
             document.getElementById('loading').remove();
         }).catch(e => {
+            console.error("❌ App failed to initialize:", e);
             document.getElementById('loading').textContent = "Failed to load app.";
-            console.error(e);
+        });
+
+        window.addEventListener("error", (event) => {
+            console.error("❗ Uncaught error:", event.error || event.message);
+        });
+
+        window.addEventListener("unhandledrejection", (event) => {
+            console.error("❗ Unhandled promise rejection:", event.reason);
         });
     </script>
 </body>
