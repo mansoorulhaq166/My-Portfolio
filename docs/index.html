@@ -2,10 +2,40 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Android Dev Portfolio (Compose WASM)</title>
+    <title>Mansoor's Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #121212;
+            color: #E0E0E0;
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        #loading {
+            font-size: 1.2rem;
+            color: #888;
+        }
+    </style>
 </head>
 <body>
-    <h1>🚀 Loading Compose WASM App…</h1>
-    <script src="composeApp.js"></script>
+    <div id="loading">Loading your portfolio...</div>
+
+    <script type="module">
+        import init from './composeApp.js';
+        init().then(() => {
+            document.getElementById('loading').remove();
+        }).catch(e => {
+            document.getElementById('loading').textContent = "Failed to load app.";
+            console.error(e);
+        });
+    </script>
 </body>
 </html>
